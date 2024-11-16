@@ -1,0 +1,149 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Basic styling */
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f7f7f7;
+}
+
+.container {
+    display: flex;
+    width: 80%;
+    max-width: 1000px;
+    background-color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Left Section - Registration */
+.register-section {
+    flex: 1;
+    padding: 40px;
+    text-align: center;
+}
+
+.logo {
+    width: 50px;
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+p {
+    font-size: 14px;
+    color: #666;
+}
+
+.social-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 15px 0;
+}
+
+.social-btn {
+    font-size: 18px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+}
+
+.fb {
+    background-color: #3b5998;
+}
+
+.google {
+    background-color: #db4a39;
+}
+
+.linkedin {
+    background-color: #0077b5;
+}
+
+.divider {
+    margin: 20px 0;
+    font-weight: bold;
+    color: #999;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+form input {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    outline: none;
+}
+
+form input:focus {
+    border-color: #00796b;
+}
+
+.register-btn {
+    padding: 10px;
+    background-color: #26a69a;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.register-btn:hover {
+    background-color: #1e8678;
+}
+
+/* Right Section - Login Prompt */
+.login-prompt-section {
+    flex: 0.6;
+    background: linear-gradient(135deg, #2F8F9D, #3DC6C1);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    text-align: center;
+}
+
+.login-prompt-section h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.login-btn {
+    padding: 10px 20px;
+    background-color: #fff;
+    color: #3DC6C1;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.login-btn:hover {
+    background-color: #f0f0f0;
+}

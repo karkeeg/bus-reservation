@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bus Booking</title>
+    <style>
+        /* CSS styling */
+
+        /* Basic reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Header styling */
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            background-color: #8AB497;
+            color: #fff;
+        }
+
+        .logo img {
+            width: 60px;
+            height: auto;
+        }
+
+        nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: #000;
+            font-size: 18px;
+        }
+
+        .auth-buttons {
+            display: flex;
+            align-items: center;
+        }
+
+        .auth-buttons button {
+            margin: 0 5px;
+            padding: 8px 15px;
+            font-size: 14px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #loginBtn {
+            background-color: #4CAF50;
+            color: #fff;
+        }
+
+        #registerBtn {
+            background-color: #333;
+            color: #fff;
+        }
+
+        .profile-icon {
+            font-size: 18px;
+            background: none;
+            border: none;
+            color: #000;
+            cursor: pointer;
+        }
+
+        /* Dropdown styling */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 150px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 10px 15px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Hero section styling */
+        .hero-section {
+            position: relative;
+            text-align: center;
+            color: white;
+            background-image: url('bus-background.jpg'); /* Add your bus image path here */
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .search-box {
+            background-color: rgba(0, 128, 0, 0.6);
+            padding: 20px;
+            border-radius: 10px;
+            width: 300px;
+        }
+
+        .search-box label {
+            display: block;
+            font-size: 14px;
+            color: #fff;
+            margin-bottom: 5px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: none;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .search-box button {
+            width: 100%;
+            padding: 10px;
+            background-color: #8E44AD;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .search-box button:hover {
+            background-color: #732d91;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header section -->
+    <header>
+        <div class="logo">
+            <img src="logo.png" alt="Logo">
+        </div>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">Available BUS</a>
+            <div class="dropdown">
+                <a href="#">Our Services</a>
+                <div class="dropdown-content">
+                    <a href="#">Service 1</a>
+                    <a href="#">Service 2</a>
+                    <a href="#">Service 3</a>
+                </div>
+            </div>
+            <a href="#">Contact Us</a>
+        </nav>
+        <div class="auth-buttons">
+            <button id="loginBtn">Log in</button>
+            <button id="registerBtn">Register</button>
+            <button class="profile-icon">&#128100;</button>
+        </div>
+    </header>
+
+    <!-- Hero Section with Search Box -->
+    <section class="hero-section">
+        <div class="search-box">
+            <form>
+                <label for="fromCity">From</label>
+                <input type="text" id="fromCity" placeholder="From City">
+                
+                <label for="toCity">To Destination</label>
+                <input type="text" id="toCity" placeholder="To City">
+                
+                <label for="date">Date</label>
+                <input type="text" id="date" placeholder="DD-MM-YYYY">
+                
+                <button type="button" onclick="searchBus()">Search</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- JavaScript -->
+    <script>
+        // Example JavaScript function for search button
+        function searchBus() {
+            const fromCity = document.getElementById('fromCity').value;
+            const toCity = document.getElementById('toCity').value;
+            const date = document.getElementById('date').value;
+            alert('Searching buses from ' + fromCity + ' to ' + toCity + ' on ' + date);
+        }
+    </script>
+</body>
+</html>
