@@ -1,7 +1,7 @@
 <?php
 $servername = "localhost";
-$username = "bus_reservation"; // adjust if necessary
-$password = ""; // adjust if necessary
+$username = "bus_reservation"; 
+$password = ""; 
 $dbname = "bus_reservation";
 
 $conn = new mysqli($servername, $username, $password, $dbname);

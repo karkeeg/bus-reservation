@@ -1,4 +1,6 @@
-        // Example JavaScript function for search button
+
+    
+       // Example JavaScript function for search button
         function searchBus() {
             const fromCity = document.getElementById('fromCity').value;
             const toCity = document.getElementById('toCity').value;

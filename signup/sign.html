@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/signup/sign.css" />
+  </head>
+  <body>
+    <!-- Header section -->
+    <header>
+      <div class="logo">
+        <a href="/index.html"><img src="/img/logo.png" alt="Logo" /></a>
+      </div>
+
+      <nav class="nav-links">
+        <a href="/index.html">Home</a>
+        <a href="/availablebus/availablebus.html">Available Bus</a>
+        <a href="#">Our Services</a>
+        <a href="#">Contact Us</a>
+      </nav>
+      <div class="auth-section">
+        <a href="/login/login.html"><button>Login</button></a>
+        <a href="/signup/sign.html"><button>Register</button></a>
+        <div class="profile" id="profile">
+          <a href="/introcard/introcard.html"
+            ><img src="/img/bibek.jpg" alt="Profile"
+          /></a>
+          <!-- <div class="profile-dropdown" id="profileDropdown">
+            <a href="#">My Profile</a>
+            <a href="#">Settings</a>
+            <a href="#">Logout</a>
+          </div> -->
+        </div>
+      </div>
+    </header>
+
+    <!-- signup section-->
+    <section>
+      <div class="signup-container">
+        <div class="slide active" id="step1">
+          <h2>Step 1: Basic Information</h2>
+          <form id="signupForm">
+            <div class="form-group">
+              <label for="name">Full Name</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Enter your full name"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Enter your email"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                placeholder="Enter your phone number"
+                required
+              />
+            </div>
+
+            <div class="btn-container">
+              <button type="button" class="btn" id="nextBtn">Next</button>
+            </div>
+          </form>
+        </div>
+        <div class="slide" id="step2">
+          <h2>Step 2: Security Details</h2>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Enter your password"
+              minlength="6"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="confirm-password">Confirm Password</label>
+            <input
+              type="password"
+              id="confirm-password"
+              name="confirm-password"
+              placeholder="Confirm your password"
+              minlength="6"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="gender">Gender</label>
+            <select id="gender" name="gender" required>
+              <option value="" disabled selected>Select your gender</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="dob">Date of Birth</label>
+            <input type="date" id="dob" name="dob" required />
+          </div>
+          <div class="btn-container">
+            <button type="button" class="btn" id="prevBtn">Back</button>
+            <button type="submit" class="btn">Signup</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!--footer section -->
+    <footer>
+      <div class="content">
+        <div class="left-box">
+          <div class="upper">
+            <div class="topic">About Us</div>
+            <p>
+              Ride-Mate is a Transportation booking system Where people can book
+              as per their satisfaction and preferences.
+            </p>
+          </div>
+          <div class="lower">
+            <div class="topic">Contact Us</div>
+            <div class="phone">
+              <a href="#"><i>📞</i>+977-9860917585</a>
+            </div>
+            <div class="email">
+              <a href="#"><i>✉️</i>abc@gmail.com</a>
+            </div>
+          </div>
+        </div>
+        <div class="middle-box">
+          <div class="topic">Our Services</div>
+          <div><a href="#">Responsive Design</a></div>
+          <div><a href="#">Easy Routes</a></div>
+          <div><a href="#">Preference booking</a></div>
+          <div><a href="#">Experienced Services</a></div>
+          <div><a href="#">Service Providers</a></div>
+          <div><a href="#">Customers Feedback</a></div>
+        </div>
+        <div class="right-box">
+          <div class="topic">Connect Us</div>
+          <form action="#">
+            <input type="text" placeholder="Enter email" />
+
+            <input type="submit" value="Send" />
+            <div class="media-icons">
+              <a href="#" class="F-icons">F</a>
+              <a href="#" class="I-icons">I</a>
+              <a href="#" class="X-icons">X</a>
+              <a href="#" class="Y-icons">Y</a>
+              <a href="#" class="In-icons">in</a>
+            </div>
+          </form>
+        </div>
+        <div class="bottom">
+          <p>
+            Copyright &#169; 2024 <a href="#">Ride-Mate </a>All right reserved
+          </p>
+        </div>
+      </div>
+    </footer>
+    <script>
+      const step1 = document.getElementById("step1");
+      const step2 = document.getElementById("step2");
+      const nextBtn = document.getElementById("nextBtn");
+      const prevBtn = document.getElementById("prevBtn");
+
+      nextBtn.addEventListener("click", () => {
+        step1.classList.remove("active");
+        step2.classList.add("active");
+      });
+
+      prevBtn.addEventListener("click", () => {
+        step2.classList.remove("active");
+        step1.classList.add("active");
+      });
+    </script>
+  </body>
+</html>

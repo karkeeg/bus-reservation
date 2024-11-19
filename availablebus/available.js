@@ -6,12 +6,12 @@ function showBusInfo(busId) {
     const buses = {
         bus1: {
             number: "1234",
-            driver: "John Doe",
+            driver: "Sujay Chaudhary",
             details: "This is a luxury bus with AC and reclining seats."
         },
         bus2: {
             number: "5678",
-            driver: "Jane Smith",
+            driver: "Binayak Aryal",
             details: "This is a standard bus with comfortable seating."
         }
         // Add more buses as needed

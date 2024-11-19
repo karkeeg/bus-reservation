@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Available Buses | Quick-Ride</title>
+    <link rel="stylesheet" href="/availablebus/available.css" />
+  </head>
+  <body>
+    <!-- Navbar -->
+    <header>
+      <div class="logo">
+        <a href="/index.html"><img src="/img/logo.png" alt="Logo" /></a>
+      </div>
+
+      <nav class="nav-links">
+        <a href="/index.html">Home</a>
+        <a href="/availablebus/availablebus.html">Available Bus</a>
+        <a href="#">Our Services</a>
+        <a href="#">Contact Us</a>
+      </nav>
+      <div class="auth-section">
+        <a href="/login/login.html"><button>Login</button></a>
+        <a href="/signup/sign.html"><button>Register</button></a>
+        <div class="profile" id="profile">
+          <a href="/introcard/introcard.html"
+            ><img src="/img/bibek.jpg" alt="Profile"
+          /></a>
+          <!-- <div class="profile-dropdown" id="profileDropdown">
+              <a href="#">My Profile</a>
+              <a href="#">Settings</a>
+              <a href="#">Logout</a>
+            </div> -->
+        </div>
+      </div>
+    </header>
+
+    <!-- Available Buses Section -->
+    <section class="bus-listing">
+      <h2>Available Buses</h2>
+      <div class="bus-card" onclick="showBusInfo('bus1')">
+        <img src="/img/bus1.jpeg" alt="Bus Image" />
+        <!-- Replace with actual bus image path -->
+        <div class="bus-details">
+          <h3>Bus Number: 1234</h3>
+          <p>Driver: Sujay Chaudhary</p>
+          <button onclick="showBusInfo('bus1')">Info</button>
+        </div>
+      </div>
+
+      <div class="bus-card" onclick="showBusInfo('bus2')">
+        <img src="/img/bus2" alt="Bus Image" />
+        <!-- Replace with actual bus image path -->
+        <div class="bus-details">
+          <h3>Bus Number: 5678</h3>
+          <p>Driver: Anup Chaudhary</p>
+          <button onclick="showBusInfo('bus2')">Info</button>
+        </div>
+      </div>
+      <div class="bus-card" onclick="showBusInfo('bus1')">
+        <img src="/img/bus1.jpeg" alt="Bus Image" />
+        <!-- Replace with actual bus image path -->
+        <div class="bus-details">
+          <h3>Bus Number: 1234</h3>
+          <p>Driver: Binayak Chhetri</p>
+          <button onclick="showBusInfo('bus1')">Info</button>
+        </div>
+      </div>
+
+      <div class="bus-card" onclick="showBusInfo('bus2')">
+        <img src="/img/bus2" alt="Bus Image" />
+        <!-- Replace with actual bus image path -->
+        <div class="bus-details">
+          <h3>Bus Number: 5678</h3>
+          <p>Driver: Samir Khatri</p>
+          <button onclick="showBusInfo('bus2')">Info</button>
+        </div>
+      </div>
+      <div class="bus-card" onclick="showBusInfo('bus1')">
+        <img src="/img/bus1.jpeg" alt="Bus Image" />
+        <!-- Replace with actual bus image path -->
+        <div class="bus-details">
+          <h3>Bus Number: 1234</h3>
+          <p>Driver: Akash Chopra</p>
+          <button onclick="showBusInfo('bus1')">Info</button>
+        </div>
+      </div>
+
+      <div class="bus-card" onclick="showBusInfo('bus2')">
+        <img src="/img/bus2" alt="Bus Image" />
+        <!-- Replace with actual bus image path -->
+        <div class="bus-details">
+          <h3>Bus Number: 5678</h3>
+          <p>Driver: Abhishek Bachhan</p>
+          <button onclick="showBusInfo('bus2')">Info</button>
+        </div>
+      </div>
+      <div class="bus-card" onclick="showBusInfo('bus1')">
+        <img src="/img/bus1.jpeg" alt="Bus Image" />
+        <!-- Replace with actual bus image path -->
+        <div class="bus-details">
+          <h3>Bus Number: 1234</h3>
+          <p>Driver: John Abraham</p>
+          <button onclick="showBusInfo('bus1')">Info</button>
+        </div>
+      </div>
+
+      <div class="bus-card" onclick="showBusInfo('bus2')">
+        <img src="/img/bus2" alt="Bus Image" />
+        <!-- Replace with actual bus image path -->
+        <div class="bus-details">
+          <h3>Bus Number: 5678</h3>
+          <p>Driver: Critiano Ronaldo</p>
+          <button onclick="showBusInfo('bus2')">Info</button>
+        </div>
+      </div>
+      <!-- Add more bus cards as needed -->
+    </section>
+
+    <!-- Bus Info Modal -->
+    <div id="busInfoModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeBusInfoModal()">&times;</span>
+        <h2 id="busNumber">Bus Number</h2>
+        <p id="driverName">Driver:</p>
+        <p id="busDetails">Additional bus information goes here...</p>
+      </div>
+    </div>
+
+    <script src="available.js"></script>
+  </body>
+</html>
