@@ -30,3 +30,51 @@ function showBusInfo(busId) {
 function closeBusInfoModal() {
     document.getElementById("busInfoModal").style.display = "none";
 }
+
+
+const locations = [
+    "Kathmandu",
+    "Pokhara",
+    "Biratnagar",
+    "Chitwan",
+    "Lumbini",
+    "Dhulikhel",
+    "Nepalgunj",
+  ];
+
+  function showSuggestions(input, type) {
+    const query = input.value.toLowerCase();
+    const listId = type === "pickup" ? "pickup-list" : "destination-list";
+    const suggestionList = document.getElementById(listId);
+
+    suggestionList.innerHTML = ""; // Clear old suggestions
+    suggestionList.style.display = query ? "block" : "none";
+
+    if (!query) return;
+
+    const filteredLocations = locations.filter((loc) =>
+      loc.toLowerCase().includes(query)
+    );
+
+    filteredLocations.forEach((loc) => {
+      const item = document.createElement("div");
+      item.classList.add("autocomplete-item");
+      item.textContent = loc;
+      item.onclick = () => {
+        input.value = loc;
+        suggestionList.style.display = "none";
+      };
+      suggestionList.appendChild(item);
+    });
+  }
+
+  function selectDay(element, date) {
+    document.querySelectorAll('.day').forEach(day => {
+      day.classList.remove('active');
+    });
+    element.classList.add('active');
+
+    // Update the travel-date input with the selected date
+    const travelDateInput = document.getElementById('travel-date');
+    travelDateInput.value = date;
+  }

@@ -35,6 +35,62 @@
       </div>
     </header>
 
+    <div class="search-container">
+      <div class="input-group">
+        <span class="icon">🚌</span>
+        <input
+          type="text"
+          class="input"
+          id="pickup-point"
+          placeholder="Start your adventure at?"
+          oninput="showSuggestions(this, 'pickup')"
+        />
+        <div class="autocomplete-list" id="pickup-list"></div>
+      </div>
+  
+      <div class="input-group">
+        <span class="icon">📍</span>
+        <input
+          type="text"
+          class="input"
+          id="destination-point"
+          placeholder="Your destination awaits at?"
+          oninput="showSuggestions(this, 'destination')"
+        />
+        <div class="autocomplete-list" id="destination-list"></div>
+      </div>
+  
+      <div class="input-group">
+        <input type="date" id="travel-date" class="input" />
+      </div>
+  
+      <div class="date-selector">
+        <div class="day active" onclick="selectDay(this, '2024-11-05')">
+          <span>05</span>
+          <small>Wed</small>
+        </div>
+        <div class="day" onclick="selectDay(this, '2024-11-06')">
+          <span>06</span>
+          <small>Thu</small>
+        </div>
+        <div class="day" onclick="selectDay(this, '2024-11-07')">
+          <span>07</span>
+          <small>Fri</small>
+        </div>
+        <div class="day" onclick="selectDay(this, '2024-11-08')">
+          <span>08</span>
+          <small>Sat</small>
+        </div>
+        <div class="day" onclick="selectDay(this, '2024-11-09')">
+          <span>09</span>
+          <small>Sun</small>
+        </div>
+      </div>
+  
+      <button class="search-button">Search</button>
+    </div>
+  
+
     <!-- Available Buses Section -->
     <section class="bus-listing">
       <h2>Available Buses</h2>

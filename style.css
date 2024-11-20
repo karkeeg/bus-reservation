@@ -16,7 +16,7 @@ header {
   align-items: center;
   justify-content: space-between;
   padding: 15px 20px 15px 30px;
-  background-color: #f4f4f4; /* Light gray background */
+  background-color: #ffffff; /* Light gray background */
   color: #333; /* Dark text for contrast */
   height: 80px;
 }
@@ -52,16 +52,19 @@ header {
   gap: 15px;
 }
 .auth-section button {
+  height: 40px;
+  width: 90px;
   padding: 8px 12px;
   border: none;
-  background: #007bff;
-  color: white;
+  background: #c3c3c3;
+  color: rgb(0, 0, 0);
   border-radius: 5px;
   cursor: pointer;
   transition: background 0.3s;
 }
 .auth-section button:hover {
-  background: #0056b3;
+  background: hsl(187, 39%, 41%);
+  color: ;
 }
 
 /* Profile Section */
@@ -131,7 +134,7 @@ header {
   padding: 20px;
   border-radius: 10px;
   width: 300px;
-  margin-left: 600px;
+  margin-left: 800px;
   margin-bottom: 80px;
 }
 
@@ -232,11 +235,9 @@ header {
 }
 
 .tour-card p {
-  font-size: 1.2em;
+  font-size: 1em;
   color: #666;
   margin-bottom: 15px;
-  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
-  font-weight: bold;
 }
 
 .learn-more {
@@ -298,7 +299,7 @@ footer {
   left: 0px;
   bottom: 0px;
   width: 100%;
-  background-color: #111;
+  background-color: #354250;
 }
 footer .content {
   max-width: 1400px;
