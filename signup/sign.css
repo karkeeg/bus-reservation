@@ -125,7 +125,7 @@ h1 {
   animation-duration: 5s;
 }
 section {
-  background: url("/img/bus.jpeg") no-repeat center center/cover;
+  background: url("../img/bus.jpeg") no-repeat center center/cover;
   height: 100vh;
   background-position: center;
   display: flex;
