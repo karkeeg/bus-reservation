@@ -10,17 +10,14 @@
     <div class="login-container">
         <h2>Admin Login</h2>
         <p>Please enter your credentials to access the dashboard.</p>
-        <!-- Display error message dynamically -->
-        <?php if (isset($_GET['error'])): ?>
-            <div class="error-message">
-                <?php echo htmlspecialchars($_GET['error']); ?>
-            </div>
-        <?php endif; ?>
+
+
         <form action="database/login.php" method="POST">
             <input type="text" name="username" placeholder="Username" required>
             <input type="password" name="password" placeholder="Password" required>
             <button type="submit">Login</button>
         </form>
+
         <div class="footer">
             <p>© 2024 Bus Reservation Admin Panel</p>
             <p><a href="#">Forgot Password?</a></p>

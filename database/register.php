@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Prepare and bind the SQL statement
     $stmt = $conn->prepare("INSERT INTO users (full_name, email, phone, password, gender, dob) VALUES (?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("ssssss", $fullName, $email, $phone, $hashedPassword, $gender, $dob);
+    $stmt->bind_param("ssssss", $fullName, $email, $phone, $password, $gender, $dob);
 
     // Execute the statement
     if ($stmt->execute()) {

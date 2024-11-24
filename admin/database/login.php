@@ -1,6 +1,5 @@
 <?php
 session_start(); // Start session to manage login state
-$error = ''; // Initialize error message variable
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'];
@@ -27,10 +26,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             header('Location: ../index.html'); // Redirect to dashboard
             exit();
         } else {
-            $error = 'Invalid password.'; // Set error message for incorrect password
+            // Redirect back with a password error message
+            header('Location: ../login.html?error=Invalid%20password');
+            exit();
         }
     } else {
-        $error = 'Invalid username.'; // Set error message for incorrect username
+        // Redirect back with a username error message
+        header('Location: ../login.html?error=Invalid%20username');
+        exit();
     }
 
     // Close database connection

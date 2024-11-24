@@ -109,7 +109,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="forgot-password">
           <a href="#">Forgot Password?</a>
         </div>
-        <?php if (isset($error)) { echo "<p class='error'>$error</p>"; } ?>
+        <?php if (isset($error)) { echo "<p class='error' style='color:white;' >$error</p>"; } ?>
       </div>
     </section>
 
