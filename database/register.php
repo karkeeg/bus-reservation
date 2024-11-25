@@ -15,14 +15,14 @@ if ($conn->connect_error) {
 
 // Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Get the form data
-    $fullName = $_POST['name'];
-    $email = $_POST['email'];
-    $phone = $_POST['phone'];
+    // Get the form data and validate
+    $fullName = $conn->real_escape_string($_POST['name']);
+    $email = $conn->real_escape_string($_POST['email']);
+    $phone = $conn->real_escape_string($_POST['phone']);
     $password = $_POST['password']; // Unhashed password
     $confirmPassword = $_POST['confirm-password'];
-    $gender = $_POST['gender'];
-    $dob = $_POST['dob'];
+    $gender = $conn->real_escape_string($_POST['gender']);
+    $dob = $conn->real_escape_string($_POST['dob']);
 
     // Validate password confirmation
     if ($password !== $confirmPassword) {
@@ -35,7 +35,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Prepare and bind the SQL statement
     $stmt = $conn->prepare("INSERT INTO users (full_name, email, phone, password, gender, dob) VALUES (?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("ssssss", $fullName, $email, $phone, $password, $gender, $dob);
+    if (!$stmt) {
+        die("Statement preparation failed: " . $conn->error);
+    }
+    $stmt->bind_param("ssssss", $fullName, $email, $phone, $hashedPassword, $gender, $dob);
 
     // Execute the statement
     if ($stmt->execute()) {
@@ -47,14 +50,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Close the statement and connection
     $stmt->close();
     $conn->close();
-
-    $conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-} else {
-    echo "Connected to the database successfully!";
-}
-
 }
 ?>

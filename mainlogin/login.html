@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Ride-Mate</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #4caf50, #2196f3); /* Green and Blue Gradient */
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .login-container {
+            background-color: rgba(0, 0, 0, 0.6);
+            border-radius: 15px;
+            padding: 30px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
+
+        .login-container h1 {
+            margin-bottom: 20px;
+            font-size: 2rem;
+            color: #fff;
+        }
+
+        .login-container p {
+            font-size: 0.9rem;
+            margin-bottom: 30px;
+        }
+
+        .login-container input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: none;
+            border-radius: 5px;
+            outline: none;
+            font-size: 1rem;
+        }
+
+        .login-container input[type="email"],
+        .login-container input[type="password"] {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+
+        .login-container button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #2196f3; /* Blue */
+            color: #fff;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .login-container button:hover {
+            background-color: #4caf50; /* Green */
+        }
+
+        .login-container a {
+            color: #ffcbcb;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .login-container a:hover {
+            text-decoration: underline;
+        }
+
+        .login-container .error {
+            color: #ff6b6b;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+
+        .login-container .links {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+        }
+
+        .login-container .links a {
+            color: #ffcbcb;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h1>Welcome Back!</h1>
+        <p>Please log in to continue</p>
+
+        <!-- Display error message dynamically -->
+        <?php if (isset($_GET['error'])): ?>
+            <div class="error"><?php echo htmlspecialchars($_GET['error']); ?></div>
+        <?php endif; ?>
+
+        <form action="login.php" method="POST">
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <button type="submit">Log In</button>
+        </form>
+
+        <div class="links">
+            <a href="forgotpassword.html">Forgot Password?</a>
+            <a href="signup.html">Sign Up</a>
+        </div>
+    </div>
+</body>
+</html>

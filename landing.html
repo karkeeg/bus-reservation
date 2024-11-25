@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ride-Mate Bus Reservation</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            background-color: white;
+        }
+        header img {
+            width: 50px;
+        }
+        nav {
+            display: flex;
+            gap: 20px;
+        }
+        nav a {
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+        }
+        nav a:hover {
+            color: green;
+        }
+        .auth-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        .auth-buttons button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .auth-buttons .login {
+            background-color: black;
+            color: white;
+        }
+        .auth-buttons a {
+            text-decoration: none;
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            text-align: center;
+        }
+        .auth-buttons a.login {
+            background-color: black;
+            color: white;
+        }
+        .auth-buttons a:hover {
+            opacity: 0.8;
+        }
+        .main-content {
+            text-align: center;
+            padding: 100px 20px;
+        }
+        .main-content h1 {
+            font-size: 3em;
+            color: #5a5a89;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="logo-placeholder.png" alt="Ride-Mate Logo">
+        <nav>
+            <a href="#about">About</a>
+            <a href="#how-it-works">How it works</a>
+            <a href="#features">Features</a>
+            <a href="#blog">Blog</a>
+        </nav>
+        <div class="auth-buttons">
+            <a href="mainlogin/login.html" class="login">Log in</a>
+        </div>
+    </header>
+    <div class="main-content">
+        <h1>Ride-Mate<br>Bus Reservation</h1>
+    </div>
+</body>
+</html>
