@@ -3,255 +3,107 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bus Booking</title>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-    />
-    <link rel="stylesheet" href="style.css" />
+    <title>Ride-Mate Bus Reservation</title>
+    <link rel="stylesheet" href="/bus-reservation/info.css" />
   </head>
   <body>
-    <!-- Header section -->
-    <header>
-      <div class="logo">
-        <a href="/index.html"><img src="img/logo.png" alt="Logo" /></a>
-      </div>
+    <!-- Back to Top Button -->
+<button id="back-to-top" class="back-to-top" >
+    ↑
 
-      <nav class="nav-links">
-        <a href="/index.html">Home</a>
-        <a href="login/login.html">Available Bus</a>
-        <a href="#our-features">Our Services</a>
-        <a href="#">Contact Us</a>
+  </button>
+  
+    <header id="header">
+      <img src="img/logo.png" alt="Ride-Mate Logo" id="logo" />
+      <nav>
+        <a href="#header">Home</a>
+        <a href="#about">About Us</a>
+        <a href="#blog">Blog</a>
+        <a href="#footer">Connect Us</a>
       </nav>
-      <div class="auth-section">
-        <a href="database/login.php"><button>Login</button></a>
-        <a href="signup/sign.html"><button>Register</button></a>
-        <div class="profile" id="profile">
-          <a href="/introcard/introcard.html"
-            ><img src="img/bibek.jpg" alt="Profile"
-          /></a>
-          <!-- <div class="profile-dropdown" id="profileDropdown">
-            <a href="#">My Profile</a>
-            <a href="#">Settings</a>
-            <a href="#">Logout</a>
-          </div> -->
-        </div>
+      <div class="auth-buttons">
+        <a href="mainlogin/login.html" class="login">Log in</a>
+        <a href="mainlogin/signup.html" class="register">Register</a>
       </div>
     </header>
 
-    <!-- Hero Section with Search Box -->
-    <section class="hero-section">
-      <div class="search-box">
-        <form>
-          <label for="fromCity">From</label>
-          <input type="text" id="fromCity" placeholder="From City" />
-
-          <label for="toCity">To Destination</label>
-          <input type="text" id="toCity" placeholder="To City" />
-
-          <label for="date">Date</label>
-          <input type="text" id="date" placeholder="DD-MM-YYYY" />
-
-          <button type="button" onclick="searchBus()">Search</button>
-        </form>
+    <section class="hero">
+      <div class="hero-content">
+        <h1>Welcome to Ride-Mate</h1>
+        <p>
+          Discover the easiest way to book tickets to your favorite destinations
+          across Nepal. From the bustling streets of Kathmandu to the serene
+          lakes of Pokhara, we've got you covered!
+        </p>
+        <a href="#about" class="scroll-button">Learn More</a>
       </div>
     </section>
 
-    <!-- Tour Packages Section -->
-    <section id="tour-packages">
-      <h2>Check Our Tour Packages</h2>
-      <div class="tour-container">
-        <button class="scroll-button" id="scrollLeft">&lt;</button>
-        <div class="tour-cards">
-          <div class="tour-card">
-            <img src="img/mustang.jpg" alt="Mustang" />
-            <h3>Mustang</h3>
-            <p>Explore the rugged landscapes and rich culture of Mustang.</p>
-            <button class="learn-more">Learn More</button>
-            <!-- Hidden expanded info -->
-            <div class="more-info" style="display: none">
-              <p>
-                Mustang is a unique and remote region in Nepal. It is known for
-                its breathtaking landscapes, high desert terrain, and rich
-                Tibetan Buddhist culture. Visitors can explore its ancient
-                monasteries, caves, and beautiful villages like Lo Manthang.
-              </p>
-            </div>
-          </div>
-
-          <div class="tour-card">
-            <img src="img/pokhara.webp" alt="Pokhara" />
-            <h3>Pokhara</h3>
-            <p>Enjoy the serene lakes and mountain views of Pokhara.</p>
-            <button class="learn-more">Learn More</button>
-            <!-- Hidden expanded info -->
-            <div class="more-info" style="display: none">
-              <p>
-                Pokhara is a popular tourist destination in Nepal, known for its
-                picturesque lakes, beautiful mountain views, and adventure
-                sports. Tourists can enjoy boating on Phewa Lake, paragliding,
-                and visit places like the World Peace Pagoda and Sarangkot for
-                stunning mountain views.
-              </p>
-            </div>
-          </div>
-
-          <div class="tour-card">
-            <img src="img/Darjeling.jpeg" alt="Darjeeling" />
-            <h3>Darjeeling</h3>
-            <p>
-              Experience the breathtaking tea gardens and mountains of
-              Darjeeling.
-            </p>
-            <button class="learn-more">Learn More</button>
-            <!-- Hidden expanded info -->
-            <div class="more-info" style="display: none">
-              <p>
-                Darjeeling, known as the "Queen of the Hills," is famous for its
-                beautiful tea gardens, the Darjeeling Himalayan Railway, and
-                stunning views of Mount Kanchenjunga. The town offers a cool
-                climate and a rich blend of Indian and Tibetan cultures.
-              </p>
-            </div>
-          </div>
-
-          <div class="tour-card">
-            <img src="img/humla.jpg" alt="Humla" />
-            <h3>Humla</h3>
-            <p>Discover the untouched beauty and culture of Humla.</p>
-            <button class="learn-more">Learn More</button>
-            <!-- Hidden expanded info -->
-            <div class="more-info" style="display: none">
-              <p>
-                Humla is one of Nepal's least-visited regions, known for its
-                pristine natural beauty, rugged terrain, and Tibetan influence.
-                The area is rich in culture, with unique monasteries and remote
-                villages that are yet to be explored by many tourists.
-              </p>
-            </div>
-          </div>
-
-          <div class="tour-card">
-            <img src="img/lumbini.png" alt="Lumbini" />
-            <h3>Lumbini</h3>
-            <p>
-              Visit the birthplace of Buddha and a UNESCO World Heritage Site.
-            </p>
-            <button class="learn-more">Learn More</button>
-            <!-- Hidden expanded info -->
-            <div class="more-info" style="display: none">
-              <p>
-                Lumbini is the birthplace of Siddhartha Gautama, who later
-                became Buddha. It is a UNESCO World Heritage Site and attracts
-                thousands of pilgrims and tourists annually. The sacred garden,
-                ancient ruins, and various monasteries offer spiritual
-                experiences for all visitors.
-              </p>
-            </div>
-          </div>
-
-          <div class="tour-card">
-            <img src="img/janakpur.jpeg" alt="Janakpur" />
-            <h3>Janakpur</h3>
-            <p>
-              Explore the vibrant culture and historical temples of Janakpur.
-            </p>
-            <button class="learn-more">Learn More</button>
-            <!-- Hidden expanded info -->
-            <div class="more-info" style="display: none">
-              <p>
-                Janakpur is known for its rich cultural heritage and the Janaki
-                Temple, dedicated to the Hindu goddess Sita. It is a significant
-                pilgrimage site and an important location in Hindu mythology,
-                with vibrant festivals and local traditions.
-              </p>
-            </div>
-          </div>
-
-          <div class="tour-card">
-            <img src="img/ilam.jpg" alt="Ilam" />
-            <h3>Ilam</h3>
-            <p>Enjoy the lush tea gardens and scenic beauty of Ilam.</p>
-            <button class="learn-more">Learn More</button>
-            <!-- Hidden expanded info -->
-            <div class="more-info" style="display: none">
-              <p>
-                Ilam is a beautiful hill district in eastern Nepal, known for
-                its lush green tea gardens, serene landscapes, and cool climate.
-                Visitors can enjoy a peaceful retreat while exploring tea
-                estates, waterfalls, and local markets.
-              </p>
-            </div>
-          </div>
-
-          <!-- Add more tour cards as needed -->
-        </div>
-        <button class="scroll-button" id="scrollRight">&gt;</button>
-      </div>
+    <!-- Section 2: Additional Content -->
+    <section id="about" class="about-section">
+      <h2>About Us</h2>
+      <p>
+        <b style="font-size: 1.5em; font-weight: bolder;">Ride-Mate</b> is your trusted partner for seamless ticket booking
+        services across Nepal. Whether you’re planning a business trip, a family
+        getaway, or an adventure in the Himalayas, we help you find and book
+        tickets for buses, flights, and more with just a few clicks.
+      </p>
+      <p>
+        Explore destinations like Kathmandu, Pokhara, Chitwan, and Lumbini with
+        confidence. Our platform is designed to offer convenience,
+        affordability, and reliability for all travelers.
+      </p>
     </section>
 
+    <section id="blog" class="blog-section">
+      <h2>Blog | Travel Insights</h2>
+      <p>
+        Explore helpful tips, updates, and stories related to bus travel in
+        Nepal. From booking tips to journey preparation, we’ve got you covered.
+      </p>
 
-    <!-- Our Features Section -->
-<section id="our-features">
-  <h2>Why Choose Ride-Mate?</h2>
-  <p class="section-description">
-    We strive to make your travel experience seamless, safe, and enjoyable.
-  </p>
-  <div class="feature-container">
-    <div class="feature-card">
-      <img src="img/Man-driving-a-coach-bus.jpg" alt="Experienced Drivers" />
-      <h3>Experienced Drivers</h3>
-      <p>
-        Our skilled and certified drivers ensure a safe and smooth journey for every ride.
-      </p>
-    </div>
-    <div class="feature-card">
-      <img src="img/145cleanbus.jpg" alt="Clean Buses" />
-      <h3>Clean Buses</h3>
-      <p>
-        Spotless, sanitized buses to give you a hygienic and comfortable travel experience.
-      </p>
-    </div>
-    <div class="feature-card">
-      <img src="img/saftey.webp" alt="Safety First" />
-      <h3>Safety First</h3>
-      <p>
-        Prioritizing your safety with advanced safety measures and reliable service.
-      </p>
-    </div>
-    <div class="feature-card">
-      <img src="img/easy.jpg" alt="Easy Booking" />
-      <h3>Easy Booking</h3>
-      <p>
-        Book tickets with ease using our user-friendly platform available 24/7.
-      </p>
-    </div>
-    <div class="feature-card">
-      <img src="img/punctual.jpg" alt="Punctual Service" />
-      <h3>Punctual Service</h3>
-      <p>
-        We value your time, ensuring prompt departures and arrivals on every journey.
-      </p>
-    </div>
-    <div class="feature-card">
-      <img src="img/24.jpg" alt="Customer Support" />
-      <h3>24/7 Support</h3>
-      <p>
-        Our dedicated customer support team is always here to assist you whenever needed.
-      </p>
-    </div>
-    <div class="feature-card">
-      <img src="img/affordale.png" alt="Affordable Fares" />
-      <h3>Affordable Fares</h3>
-      <p>
-        Enjoy premium travel experiences at prices that won't break your budget.
-      </p>
-    </div>
-  </div>
-</section>
+      <div class="blog-posts">
+        <!-- Blog Post 1 -->
+        <article class="blog-post">
+          <img
+            src="/bus-reservation/img/booking.jpg"
+            alt="How to Book Tickets"
+          />
+          <p class="topic">How to Book Your Bus Ticket Online</p class="topic">
+          <p>
+            A step-by-step guide on how to easily book your bus tickets using
+            our platform.
+          </p>
+          <a href="#">Read More</a>
+        </article>
 
-    <!--footer section -->
-    <footer>
+        <!-- Blog Post 2 -->
+        <article class="blog-post">
+          <img src="/bus-reservation/img/booking.jpg" alt="Safety Tips" />
+          <p class="topic">Safety Tips for Your Bus Journey</p class="topic">
+          <p>
+            Essential safety tips to ensure a smooth and secure journey while
+            traveling by bus in Nepal.
+          </p>
+          <a href="#">Read More</a>
+        </article>
+
+        <!-- Blog Post 3 -->
+        <article class="blog-post">
+          <img src="/bus-reservation/img/booking.jpg" alt="Popular Routes" />
+          <p class="topic">Popular Bus Routes to travel in Nepal</p class="topic">
+          <p>
+            Discover most popular and scenic routes connecting major
+            cities like Kathmandu, Pokhara, and Chitwan.
+          </p>
+          <a href="#">Read More</a>
+        </article>
+       
+     </div></section>
+
+
+    <!--footer section-->
+    <footer id="footer">
       <div class="content">
         <div class="left-box">
           <div class="upper">
@@ -287,11 +139,11 @@
 
             <input type="submit" value="Send" />
             <div class="media-icons">
-              <a href="#" class="F-icons">F</a>
-              <a href="#" class="I-icons">I</a>
-              <a href="#" class="X-icons">X</a>
-              <a href="#" class="Y-icons">Y</a>
-              <a href="#" class="In-icons">in</a>
+              <a href="#" class="F-icons"><img src="/bus-reservation/img/icons8-facebook-48.png" alt=""></a>
+              <a href="#" class="I-icons"><img src="/bus-reservation/img/icons8-instagram-48.png" alt=""></a>
+              <a href="#" class="X-icons"><img src="/bus-reservation/img/icons8-youtube-48.png" alt=""></a>
+              <a href="#" class="Y-icons"><img src="/bus-reservation/img/icons8-linkedin-48.png" alt=""></a>
+              <a href="#" class="In-icons"><img src="/bus-reservation/img/icons8-whatsapp-48.png" alt=""></a>
             </div>
           </form>
         </div>
@@ -302,6 +154,28 @@
         </div>
       </div>
     </footer>
+
+    <script>
+        // Get the button
+const backToTopButton = document.getElementById('back-to-top');
+
+// When the user scrolls down 100px from the top, show the button
+window.onscroll = function() {
+  if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+    backToTopButton.style.display = 'block';
+  } else {
+    backToTopButton.style.display = 'none';
+  }
+};
+
+// When the button is clicked, scroll to the top of the page
+backToTopButton.addEventListener('click', function() {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth' // Smooth scroll to the top
+  });
+});
+
+    </script>
   </body>
-  <script src="script.js"></script>
 </html>

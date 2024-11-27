@@ -31,7 +31,7 @@ header {
   text-decoration: none;
   color: #333; /* Dark text for light background */
   padding: 8px 12px;
-  transition: background 0.3s;
+  transition: background 0.3s ease;
 }
 .nav-links a:hover {
   background: #ddd; /* Light hover effect */

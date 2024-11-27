@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bus Booking</title>
+
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <!-- Header section -->
+    <header>
+      <div class="logo">
+        <a href="landingpage.html"><img src="img/logo.png" alt="Logo" /></a>
+      </div>
+
+      <nav class="nav-links">
+        <a href="landingpage.html">Home</a>
+        <a href="/availablebus/availablebus.html">Available Bus</a>
+        <a href="#our-features">Our Services</a>
+        <a href="#footer">Contact Us</a>
+      </nav>
+      <div class="auth-section">
+        <div class="profile" id="profile">
+          <a href="/introcard/introcard.html"
+            ><img src="img/bibek.jpg" alt="Profile"
+          /></a>
+        </div>
+      </div>
+    </header>
+
+    <!--search buses-->
+    <section class="search-card">
+      <div class="bus-search-card">
+        <h2>Search for a Bus</h2>
+        <form id="busSearchForm" action="/database/book.php" method="post">
+          <!-- From Destination -->
+          <div class="form-group">
+            <label for="from">From:</label>
+            <input
+              type="text"
+              id="from"
+              list="cities"
+              placeholder="Enter starting location"
+              required
+            />
+          </div>
+          <!-- To Destination -->
+          <div class="form-group">
+            <label for="to">To:</label>
+            <input
+              type="text"
+              id="to"
+              list="cities"
+              placeholder="Enter destination"
+              required
+            />
+          </div>
+          <!-- Datalist for Cities -->
+          <datalist id="cities">
+            <option value="Kathmandu"></option>
+            <option value="Pokhara"></option>
+            <option value="Chitwan"></option>
+            <option value="Butwal"></option>
+            <option value="Biratnagar"></option>
+            <option value="Janakpur"></option>
+            <option value="Nepalgunj"></option>
+            <option value="Birgunj"></option>
+            <option value="Dhangadhi"></option>
+            <option value="Itahari"></option>
+          </datalist>
+
+          <!-- Date Picker -->
+          <div class="form-group">
+            <label for="date">Date:</label>
+            <input type="date" id="date" required />
+          </div>
+          <!-- Error Message -->
+          <p id="error" style="color: red; display: none"></p>
+          <!-- Submit Button -->
+          <button type="submit" class="search-btn">Search</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Tour Packages Section -->
+    <section id="tour-packages">
+      <h2>Check Our Tour Packages</h2>
+      <div class="tour-container">
+        <button class="scroll-button" id="scrollLeft">&lt;</button>
+        <div class="tour-cards">
+          <div class="tour-card">
+            <img src="img/mustang.jpg" alt="Mustang" />
+            <h3>Mustang</h3>
+            <p>Explore the rugged landscapes and rich culture of Mustang.</p>
+            <button class="learn-more">Learn More</button>
+            <!-- Hidden expanded info -->
+            <div class="more-info" style="display: none">
+              <p>
+                Mustang is a unique and remote region in Nepal. It is known for
+                its breathtaking landscapes, high desert terrain, and rich
+                Tibetan Buddhist culture. Visitors can explore its ancient
+                monasteries, caves, and beautiful villages like Lo Manthang.
+              </p>
+            </div>
+          </div>
+
+          <div class="tour-card">
+            <img src="img/pokhara.webp" alt="Pokhara" />
+            <h3>Pokhara</h3>
+            <p>Enjoy the serene lakes and mountain views of Pokhara.</p>
+            <button class="learn-more">Learn More</button>
+            <!-- Hidden expanded info -->
+            <div class="more-info" style="display: none">
+              <p>
+                Pokhara is a popular tourist destination in Nepal, known for its
+                picturesque lakes, beautiful mountain views, and adventure
+                sports. Tourists can enjoy boating on Phewa Lake, paragliding,
+                and visit places like the World Peace Pagoda and Sarangkot for
+                stunning mountain views.
+              </p>
+            </div>
+          </div>
+
+          <div class="tour-card">
+            <img src="img/Darjeling.jpeg" alt="Darjeeling" />
+            <h3>Darjeeling</h3>
+            <p>
+              Experience the breathtaking tea gardens and mountains of
+              Darjeeling.
+            </p>
+            <button class="learn-more">Learn More</button>
+            <!-- Hidden expanded info -->
+            <div class="more-info" style="display: none">
+              <p>
+                Darjeeling, known as the "Queen of the Hills," is famous for its
+                beautiful tea gardens, the Darjeeling Himalayan Railway, and
+                stunning views of Mount Kanchenjunga. The town offers a cool
+                climate and a rich blend of Indian and Tibetan cultures.
+              </p>
+            </div>
+          </div>
+
+          <div class="tour-card">
+            <img src="img/humla.jpg" alt="Humla" />
+            <h3>Humla</h3>
+            <p>Discover the untouched beauty and culture of Humla.</p>
+            <button class="learn-more">Learn More</button>
+            <!-- Hidden expanded info -->
+            <div class="more-info" style="display: none">
+              <p>
+                Humla is one of Nepal's least-visited regions, known for its
+                pristine natural beauty, rugged terrain, and Tibetan influence.
+                The area is rich in culture, with unique monasteries and remote
+                villages that are yet to be explored by many tourists.
+              </p>
+            </div>
+          </div>
+
+          <div class="tour-card">
+            <img src="img/lumbini.png" alt="Lumbini" />
+            <h3>Lumbini</h3>
+            <p>
+              Visit the birthplace of Buddha and a UNESCO World Heritage Site.
+            </p>
+            <button class="learn-more">Learn More</button>
+            <!-- Hidden expanded info -->
+            <div class="more-info" style="display: none">
+              <p>
+                Lumbini is the birthplace of Siddhartha Gautama, who later
+                became Buddha. It is a UNESCO World Heritage Site and attracts
+                thousands of pilgrims and tourists annually. The sacred garden,
+                ancient ruins, and various monasteries offer spiritual
+                experiences for all visitors.
+              </p>
+            </div>
+          </div>
+
+          <div class="tour-card">
+            <img src="img/janakpur.jpeg" alt="Janakpur" />
+            <h3>Janakpur</h3>
+            <p>
+              Explore the vibrant culture and historical temples of Janakpur.
+            </p>
+            <button class="learn-more">Learn More</button>
+            <!-- Hidden expanded info -->
+            <div class="more-info" style="display: none">
+              <p>
+                Janakpur is known for its rich cultural heritage and the Janaki
+                Temple, dedicated to the Hindu goddess Sita. It is a significant
+                pilgrimage site and an important location in Hindu mythology,
+                with vibrant festivals and local traditions.
+              </p>
+            </div>
+          </div>
+
+          <div class="tour-card">
+            <img src="img/ilam.jpg" alt="Ilam" />
+            <h3>Ilam</h3>
+            <p>Enjoy the lush tea gardens and scenic beauty of Ilam.</p>
+            <button class="learn-more">Learn More</button>
+            <!-- Hidden expanded info -->
+            <div class="more-info" style="display: none">
+              <p>
+                Ilam is a beautiful hill district in eastern Nepal, known for
+                its lush green tea gardens, serene landscapes, and cool climate.
+                Visitors can enjoy a peaceful retreat while exploring tea
+                estates, waterfalls, and local markets.
+              </p>
+            </div>
+          </div>
+
+          <!-- Add more tour cards as needed -->
+        </div>
+        <button class="scroll-button" id="scrollRight">&gt;</button>
+      </div>
+    </section>
+
+    <!-- Our Features Section -->
+    <section id="our-features">
+      <h2>Why Choose Ride-Mate?</h2>
+      <p class="section-description">
+        We strive to make your travel experience seamless, safe, and enjoyable.
+      </p>
+      <div class="feature-container">
+        <div class="feature-card">
+          <img
+            src="img/Man-driving-a-coach-bus.jpg"
+            alt="Experienced Drivers"
+          />
+          <h3>Experienced Drivers</h3>
+          <p>
+            Our skilled and certified drivers ensure a safe and smooth journey
+            for every ride.
+          </p>
+        </div>
+        <div class="feature-card">
+          <img src="img/145cleanbus.jpg" alt="Clean Buses" />
+          <h3>Clean Buses</h3>
+          <p>
+            Spotless, sanitized buses to give you a hygienic and comfortable
+            travel experience.
+          </p>
+        </div>
+        <div class="feature-card">
+          <img src="img/saftey.webp" alt="Safety First" />
+          <h3>Safety First</h3>
+          <p>
+            Prioritizing your safety with advanced safety measures and reliable
+            service.
+          </p>
+        </div>
+        <div class="feature-card">
+          <img src="img/easy.jpg" alt="Easy Booking" />
+          <h3>Easy Booking</h3>
+          <p>
+            Book tickets with ease using our user-friendly platform available
+            24/7.
+          </p>
+        </div>
+        <div class="feature-card">
+          <img src="img/punctual.jpg" alt="Punctual Service" />
+          <h3>Punctual Service</h3>
+          <p>
+            We value your time, ensuring prompt departures and arrivals on every
+            journey.
+          </p>
+        </div>
+        <div class="feature-card">
+          <img src="img/24.jpg" alt="Customer Support" />
+          <h3>24/7 Support</h3>
+          <p>
+            Our dedicated customer support team is always here to assist you
+            whenever needed.
+          </p>
+        </div>
+        <div class="feature-card">
+          <img src="img/affordale.png" alt="Affordable Fares" />
+          <h3>Affordable Fares</h3>
+          <p>
+            Enjoy premium travel experiences at prices that won't break your
+            budget.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!--footer section -->
+    <footer id="footer">
+      <div class="content">
+        <div class="left-box">
+          <div class="upper">
+            <div class="topic">About Us</div>
+            <p>
+              Ride-Mate is a Transportation booking system Where people can book
+              as per their satisfaction and preferences.
+            </p>
+          </div>
+          <div class="lower">
+            <div class="topic">Contact Us</div>
+            <div class="phone">
+              <a href="#"><i>📞</i>+977-9860917585</a>
+            </div>
+            <div class="email">
+              <a href="#"><i>✉️</i>abc@gmail.com</a>
+            </div>
+          </div>
+        </div>
+        <div class="middle-box">
+          <div class="topic">Our Services</div>
+          <div><a href="#">Responsive Design</a></div>
+          <div><a href="#">Easy Routes</a></div>
+          <div><a href="#">Preference booking</a></div>
+          <div><a href="#">Experienced Services</a></div>
+          <div><a href="#">Service Providers</a></div>
+          <div><a href="#">Customers Feedback</a></div>
+        </div>
+        <div class="right-box">
+          <div class="topic">Connect Us</div>
+          <form action="#">
+            <input type="text" placeholder="Enter email" />
+
+            <input type="submit" value="Send" />
+            <div class="media-icons">
+              <a href="#" class="F-icons"
+                ><img src="/bus-reservation/img/icons8-facebook-48.png" alt=""
+              /></a>
+              <a href="#" class="I-icons"
+                ><img src="/bus-reservation/img/icons8-instagram-48.png" alt=""
+              /></a>
+              <a href="#" class="X-icons"
+                ><img src="/bus-reservation/img/icons8-youtube-48.png" alt=""
+              /></a>
+              <a href="#" class="Y-icons"
+                ><img src="/bus-reservation/img/icons8-linkedin-48.png" alt=""
+              /></a>
+              <a href="#" class="In-icons"
+                ><img src="/bus-reservation/img/icons8-whatsapp-48.png" alt=""
+              /></a>
+            </div>
+          </form>
+        </div>
+        <div class="bottom">
+          <p>
+            Copyright &#169; 2024 <a href="#">Ride-Mate </a>All right reserved
+          </p>
+        </div>
+      </div>
+    </footer>
+  </body>
+  <script src="script.js"></script>
+</html>

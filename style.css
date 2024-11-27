@@ -6,7 +6,9 @@
   padding: 0;
   box-sizing: border-box;
 }
-
+html {
+  scroll-behavior: smooth;
+}
 /* Header styling */
 body {
   font-family: Arial, sans-serif;
@@ -117,57 +119,62 @@ header {
 }
 
 /* Hero section styling */
-.hero-section {
-  position: relative;
-  text-align: center;
-  color: white;
+.search-card {
   background-image: url("img/bg.png"); /* Add your bus image path here */
-  background-size: cover;
-  background-position: center;
+  color: white;
   height: 100vh;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-
-.search-box {
+.bus-search-card {
   background-color: rgba(0, 128, 0, 0.6);
   padding: 20px;
   border-radius: 10px;
   width: 300px;
-  margin-left: 800px;
+  margin-left: 50%;
   margin-bottom: 80px;
 }
 
-.search-box label {
+h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
   display: block;
-  font-size: 14px;
-  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  color: #313030;
   margin-bottom: 5px;
 }
 
-.search-box input {
-  width: 100%;
-  padding: 8px;
-  margin-bottom: 15px;
-  border: none;
-  border-radius: 5px;
-  font-size: 14px;
-}
-
-.search-box button {
+input {
   width: 100%;
   padding: 10px;
-  background-color: #8e44ad;
-  border: none;
+  font-size: 14px;
+  border: 1px solid #ccc;
   border-radius: 5px;
-  color: #fff;
-  font-size: 16px;
-  cursor: pointer;
 }
 
-.search-box button:hover {
-  background-color: #732d91;
+.search-btn {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.search-btn:hover {
+  background-color: #0056b3;
 }
 
 /* Tour Packages Section */
@@ -377,7 +384,6 @@ header {
     font-size: 2.2em;
   }
 }
-
 
 /* Footer Styles */
 footer {
