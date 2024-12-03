@@ -6,26 +6,21 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Get booking details
+// Get form inputs
 $bus_id = $_POST['bus_id'];
 $date = $_POST['date'];
+$name = $_POST['name'];
+$phone = $_POST['phone'];
 
-// Decrease seat count
-$sql = "UPDATE buses SET seats_available = seats_available - 1 WHERE id = ? AND seats_available > 0";
+// Insert booking data
+$sql = "INSERT INTO bookings (bus_id,name, phone, booking_date) VALUES (?, ?, ?, ?)";
 $stmt = $conn->prepare($sql);
-$stmt->bind_param('i', $bus_id);
-$stmt->execute();
+$stmt->bind_param('isss', $bus_id, $name, $phone, $date);
 
-if ($stmt->affected_rows > 0) {
-    // Insert into bookings table
-    $sql = "INSERT INTO bookings (bus_id, travel_date) VALUES (?, ?)";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param('is', $bus_id, $date);
-    $stmt->execute();
-    
-    echo "<p>Booking confirmed!</p>";
+if ($stmt->execute()) {
+    echo "<p>Booking confirmed! Thank you, " . htmlspecialchars($name) . ".</p>";
 } else {
-    echo "<p>Booking failed. No seats available.</p>";
+    echo "<p>Error: " . $conn->error . "</p>";
 }
 
 $conn->close();
