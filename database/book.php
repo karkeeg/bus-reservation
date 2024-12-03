@@ -1,50 +1,40 @@
-<!-- INSERT INTO `buses` (`id`, `from`, `to`, `date`, `bus_name`, `departure_time`, `Fare`) 
- VALUES ('1', 'Kathmandu', 'Pokhara', '2024-12-01', 'Surjay Travels', '07:00:00', '1500.00');
- 
- INSERT INTO `buses` (`id`, `from`, `to`, `date`, `bus_name`, `departure_time`, `Fare`) 
- VALUES ('2', 'Kathmandu', 'Chitwan', '2024-12-01', 'Karkee Travels', '08:00:00', '1800.00');
- -->
+<?php
+// Database connection
+$conn = new mysqli('localhost', 'root', '', 'bus_reservation');
 
- <?php
-// Database configuration
-$servername = "localhost";
-$username = "root";
-$password = ""; // Change if your MySQL has a different root password
-$dbname = "bus_search";
-
-// Connect to the database
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
 if ($conn->connect_error) {
-    die(json_encode(["error" => "Connection failed: " . $conn->connect_error]));
+    die("Connection failed: " . $conn->connect_error);
 }
 
-// Get search parameters
-$from = isset($_GET['from']) ? $conn->real_escape_string($_GET['from']) : '';
-$to = isset($_GET['to']) ? $conn->real_escape_string($_GET['to']) : '';
-$date = isset($_GET['date']) ? $conn->real_escape_string($_GET['date']) : '';
+// Get form inputs
+$from = $_POST['from'];
+$to = $_POST['to'];
+$date = $_POST['date'];
 
-if (!$from || !$to || !$date) {
-    echo json_encode(["error" => "Please provide 'from', 'to', and 'date' parameters."]);
-    exit;
-}
+// Search for available buses
+$sql = "SELECT * FROM buses WHERE from_city = ? AND to_city = ? AND departure_date = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param('sss', $from, $to, $date);
+$stmt->execute();
+$result = $stmt->get_result();
 
-// Query the database
-$sql = "SELECT * FROM buses WHERE `from` = '$from' AND `to` = '$to' AND `date` = '$date'";
-$result = $conn->query($sql);
-
-// Process results
+// Display search results
 if ($result->num_rows > 0) {
-    $buses = [];
+    echo "<h2>Available Buses</h2><ul>";
     while ($row = $result->fetch_assoc()) {
-        $buses[] = $row;
+        echo "<li><strong>" . $row['bus_name'] . "</strong> | Seats: " . $row['seats_available'] . 
+             " | Date: " . $row['departure_date'] . 
+             "<form method='post' action='confirm_booking.php'>
+                <input type='hidden' name='bus_id' value='" . $row['id'] . "' />
+                <input type='hidden' name='date' value='" . $date . "' />
+                <button type='submit'>Book Now</button>
+              </form>
+             </li>";
     }
-    echo json_encode($buses);
+    echo "</ul>";
 } else {
-    echo json_encode(["message" => "No buses found for this route."]);
+    echo "<p>No buses available for the selected route and date.</p>";
 }
 
-// Close connection
 $conn->close();
 ?>

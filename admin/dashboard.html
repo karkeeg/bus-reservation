@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <link rel="stylesheet" href="dasahboard.css" />
+  </head>
+  <body>
+    <div class="dashboard-content">
+      <!-- Navbar -->
+      <div class="navbar">
+        <h1>Welcome, Admin</h1>
+        <a href="database/logout.php" class="logout-btn">Logout</a>
+      </div>
+
+      <!-- Dashboard Cards -->
+      <div class="cards">
+        <div class="card">
+          <div class="icon">🚍</div>
+          <h3>Total Buses</h3>
+          <p>5</p>
+        </div>
+        <div class="card">
+          <div class="icon">📅</div>
+          <h3>Total Bookings</h3>
+          <p>35</p>
+        </div>
+        <div class="card">
+          <div class="icon">👥</div>
+          <h3>Total Users</h3>
+          <p>120</p>
+        </div>
+        <div class="card">
+          <div class="icon">⚙️</div>
+          <h3>Settings</h3>
+          <p>2</p>
+        </div>
+      </div>
+
+      <!-- Booking Table -->
+      <div class="table-container">
+        <h2>Recent Bookings</h2>
+        <table>
+          <tr>
+            <th>Booking ID</th>
+            <th>User</th>
+            <th>Bus</th>
+            <th>Date</th>
+            <th>Status</th>
+          </tr>
+          <tr>
+            <td>#1023</td>
+            <td>John Doe</td>
+            <td>Bus A</td>
+            <td>2024-11-22</td>
+            <td>Confirmed</td>
+          </tr>
+          <tr>
+            <td>#1024</td>
+            <td>Jane Smith</td>
+            <td>Bus B</td>
+            <td>2024-11-23</td>
+            <td>Pending</td>
+          </tr>
+          <tr>
+            <td>#1025</td>
+            <td>Samuel Green</td>
+            <td>Bus C</td>
+            <td>2024-11-24</td>
+            <td>Confirmed</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

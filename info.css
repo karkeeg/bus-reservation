@@ -82,7 +82,7 @@ nav a:hover {
   text-align: center;
 }
 .auth-buttons a.login {
-  background-color: #6c5ce7; /* Light Blue */
+  background-color: #5ce76e; /* Light Blue */
   color: white;
   transition: background-color 0.5s ease transform 0.5s ease;
 }

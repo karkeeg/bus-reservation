@@ -1,13 +1,4 @@
 
-    
-       // Example JavaScript function for search button
-        function searchBus() {
-            const fromCity = document.getElementById('fromCity').value;
-            const toCity = document.getElementById('toCity').value;
-            const date = document.getElementById('date').value;
-            alert('Searching buses from ' + fromCity + ' to ' + toCity + ' on ' + date);
-        }
-        
         // Script to handle scrolling of the tour cards
 document.addEventListener('DOMContentLoaded', () => {
     const tourCardsContainer = document.querySelector('.tour-cards');

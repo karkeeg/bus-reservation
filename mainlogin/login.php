@@ -17,6 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $sql->execute();
     $result = $sql->get_result();
 
+
     if ($result->num_rows === 1) {
         $user = $result->fetch_assoc();
 
@@ -29,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if ($user['role'] === 'admin') {
                 header('Location: ../admin/index.html'); // Admin dashboard
             } else {
-                header('Location: ../index.html'); // User dashboard
+                header('Location: ../landingpage.html'); // User dashboard
             }
             exit();
         } else {

@@ -4,8 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bus Booking</title>
-
-    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <!-- Header section -->
@@ -16,7 +15,9 @@
 
       <nav class="nav-links">
         <a href="landingpage.html">Home</a>
-        <a href="/availablebus/availablebus.html">Available Bus</a>
+        <a href="/bus-reservation/availablebus/availablebus.html"
+          >Available Bus</a
+        >
         <a href="#our-features">Our Services</a>
         <a href="#footer">Contact Us</a>
       </nav>
@@ -33,7 +34,11 @@
     <section class="search-card">
       <div class="bus-search-card">
         <h2>Search for a Bus</h2>
-        <form id="busSearchForm" action="/database/book.php" method="post">
+        <form
+          id="busSearchForm"
+          action="/bus-reservation/database/book.php"
+          method="post"
+        >
           <!-- From Destination -->
           <div class="form-group">
             <label for="from">From:</label>
@@ -41,6 +46,7 @@
               type="text"
               id="from"
               list="cities"
+              name="from"
               placeholder="Enter starting location"
               required
             />
@@ -52,6 +58,7 @@
               type="text"
               id="to"
               list="cities"
+              name="to"
               placeholder="Enter destination"
               required
             />
@@ -73,7 +80,7 @@
           <!-- Date Picker -->
           <div class="form-group">
             <label for="date">Date:</label>
-            <input type="date" id="date" required />
+            <input type="date" id="date" name="date" required />
           </div>
           <!-- Error Message -->
           <p id="error" style="color: red; display: none"></p>
@@ -82,6 +89,7 @@
         </form>
       </div>
     </section>
+    <script src="landinpage.js"></script>
 
     <!-- Tour Packages Section -->
     <section id="tour-packages">
