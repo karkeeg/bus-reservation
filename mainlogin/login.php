@@ -2,8 +2,15 @@
 session_start();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $email = $_POST['email']; // Change from username to email
-    $password = $_POST['password'];
+    // Sanitize and validate email and password input
+    $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+    $password = trim($_POST['password']);
+
+    // Check if the email is valid
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        header('Location: login.html?error=Invalid%20email');
+        exit();
+    }
 
     // Connect to the database
     $conn = new mysqli('localhost', 'root', '', 'bus_reservation');
@@ -17,18 +24,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $sql->execute();
     $result = $sql->get_result();
 
-
     if ($result->num_rows === 1) {
         $user = $result->fetch_assoc();
 
         // Verify password
         if (password_verify($password, $user['password'])) {
-            $_SESSION['username'] = $user['full_name']; // Store full name in session (optional)
-            $_SESSION['role'] = $user['role'];
+            // Store user information in session
+            $_SESSION['user_id'] = $user['id']; // Store user ID
+            $_SESSION['username'] = $user['full_name']; // Store full name
+            $_SESSION['role'] = $user['role']; // Store role
 
-            // Redirect based on role
+            // Redirect based on user role
             if ($user['role'] === 'admin') {
-                header('Location: ../admin/index.html'); // Admin dashboard
+                header('Location: ../admin/dashboard.php'); // Admin dashboard
             } else {
                 header('Location: ../landingpage.html'); // User dashboard
             }
