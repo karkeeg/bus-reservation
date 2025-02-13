@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ride-Mate Bus Reservation</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="/bus-reservation/info.css" />
   </head>
   <body>
@@ -15,15 +16,9 @@
   
     <header id="header">
       <img src="img/logo.png" alt="Ride-Mate Logo" id="logo" />
-      <nav>
-        <a href="#header">Home</a>
-        <a href="#about">About Us</a>
-        <a href="#blog">Blog</a>
-        <a href="#footer">Connect Us</a>
-      </nav>
       <div class="auth-buttons">
-        <a href="mainlogin/login.html" class="login">Log in</a>
-        <a href="mainlogin/signup.html" class="register">Register</a>
+        <a href="mainlogin/login.php" class="login">Log in</a>
+        <a href="mainlogin/signup.php" class="register">Register</a>
       </div>
     </header>
 
@@ -55,54 +50,9 @@
       </p>
     </section>
 
-    <section id="blog" class="blog-section">
-      <h2>Blog | Travel Insights</h2>
-      <p>
-        Explore helpful tips, updates, and stories related to bus travel in
-        Nepal. From booking tips to journey preparation, we’ve got you covered.
-      </p>
-
-      <div class="blog-posts">
-        <!-- Blog Post 1 -->
-        <article class="blog-post">
-          <img
-            src="/bus-reservation/img/booking.jpg"
-            alt="How to Book Tickets"
-          />
-          <p class="topic">How to Book Your Bus Ticket Online</p class="topic">
-          <p>
-            A step-by-step guide on how to easily book your bus tickets using
-            our platform.
-          </p>
-          <a href="#">Read More</a>
-        </article>
-
-        <!-- Blog Post 2 -->
-        <article class="blog-post">
-          <img src="/bus-reservation/img/booking.jpg" alt="Safety Tips" />
-          <p class="topic">Safety Tips for Your Bus Journey</p class="topic">
-          <p>
-            Essential safety tips to ensure a smooth and secure journey while
-            traveling by bus in Nepal.
-          </p>
-          <a href="#">Read More</a>
-        </article>
-
-        <!-- Blog Post 3 -->
-        <article class="blog-post">
-          <img src="/bus-reservation/img/booking.jpg" alt="Popular Routes" />
-          <p class="topic">Popular Bus Routes to travel in Nepal</p class="topic">
-          <p>
-            Discover most popular and scenic routes connecting major
-            cities like Kathmandu, Pokhara, and Chitwan.
-          </p>
-          <a href="#">Read More</a>
-        </article>
-       
-     </div></section>
 
 
-    <!--footer section-->
+    <!-- Footer Section -->
     <footer id="footer">
       <div class="content">
         <div class="left-box">
@@ -136,14 +86,14 @@
           <div class="topic">Connect Us</div>
           <form action="#">
             <input type="text" placeholder="Enter email" />
-
             <input type="submit" value="Send" />
             <div class="media-icons">
-              <a href="#" class="F-icons"><img src="/bus-reservation/img/icons8-facebook-48.png" alt=""></a>
-              <a href="#" class="I-icons"><img src="/bus-reservation/img/icons8-instagram-48.png" alt=""></a>
-              <a href="#" class="X-icons"><img src="/bus-reservation/img/icons8-youtube-48.png" alt=""></a>
-              <a href="#" class="Y-icons"><img src="/bus-reservation/img/icons8-linkedin-48.png" alt=""></a>
-              <a href="#" class="In-icons"><img src="/bus-reservation/img/icons8-whatsapp-48.png" alt=""></a>
+              <!-- FontAwesome Social Icons -->
+              <a href="#" class="F-icons"><i class="fab fa-facebook-f"></i></a>
+              <a href="#" class="I-icons"><i class="fab fa-instagram"></i></a>
+              <a href="#" class="X-icons"><i class="fab fa-youtube"></i></a>
+              <a href="#" class="Y-icons"><i class="fab fa-linkedin-in"></i></a>
+              <a href="#" class="In-icons"><i class="fab fa-whatsapp"></i></a>
             </div>
           </form>
         </div>

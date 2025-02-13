@@ -5,29 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bus Booking</title>
     <link rel="stylesheet" href="style.css" />
+    <!-- Include FontAwesome for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet" />
   </head>
   <body>
-    <!-- Header section -->
-    <header>
-      <div class="logo">
-        <a href="landingpage.html"><img src="img/logo.png" alt="Logo" /></a>
-      </div>
-      <nav class="nav-links">
-        <a href="landingpage.html">Home</a>
-        <a href="/bus-reservation/availablebus/availablebus.php"
-          >Available Bus</a
-        >
-        <a href="#our-features">Our Services</a>
-        <a href="#footer">Contact Us</a>
-      </nav>
-      <div class="auth-section">
-        <div class="profile" id="profile">
-          <a href="/introcard/introcard.html"
-            ><img src="img/bibek.jpg" alt="Profile"
-          /></a>
-        </div>
-      </div>
-    </header>
+<!-- Header section -->
+<header>
+  <div class="logo">
+    <a href="landingpage.html"><img src="img/logo.png" alt="Logo" /></a>
+  </div>
+  <nav class="nav-links">
+    <a href="landingpage.html">Home</a>
+    <a href="database/book.php">Available Bus</a>
+    <a href="#our-features">Our Services</a>
+  </nav>
+  <div class="auth-section">
+    <div class="profile" id="profile">
+      <!-- Replace image with Font Awesome user icon -->
+      <a href="profile.php">
+        <i class="fas fa-user" style="font-size: 30px; color: black;"></i>
+      </a>
+    </div>
+  </div>
+</header>
+
 
     <!--search buses-->
     <section class="search-card">
@@ -292,7 +293,8 @@
       </div>
     </section>
 
-    <!--footer section -->
+
+    <!-- Footer Section -->
     <footer id="footer">
       <div class="content">
         <div class="left-box">
@@ -326,24 +328,14 @@
           <div class="topic">Connect Us</div>
           <form action="#">
             <input type="text" placeholder="Enter email" />
-
             <input type="submit" value="Send" />
             <div class="media-icons">
-              <a href="#" class="F-icons"
-                ><img src="/bus-reservation/img/icons8-facebook-48.png" alt=""
-              /></a>
-              <a href="#" class="I-icons"
-                ><img src="/bus-reservation/img/icons8-instagram-48.png" alt=""
-              /></a>
-              <a href="#" class="X-icons"
-                ><img src="/bus-reservation/img/icons8-youtube-48.png" alt=""
-              /></a>
-              <a href="#" class="Y-icons"
-                ><img src="/bus-reservation/img/icons8-linkedin-48.png" alt=""
-              /></a>
-              <a href="#" class="In-icons"
-                ><img src="/bus-reservation/img/icons8-whatsapp-48.png" alt=""
-              /></a>
+              <!-- FontAwesome Social Icons -->
+              <a href="#" class="F-icons"><i class="fab fa-facebook-f"></i></a>
+              <a href="#" class="I-icons"><i class="fab fa-instagram"></i></a>
+              <a href="#" class="X-icons"><i class="fab fa-youtube"></i></a>
+              <a href="#" class="Y-icons"><i class="fab fa-linkedin-in"></i></a>
+              <a href="#" class="In-icons"><i class="fab fa-whatsapp"></i></a>
             </div>
           </form>
         </div>
