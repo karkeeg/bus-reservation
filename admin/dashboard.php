@@ -34,12 +34,14 @@ $availableBuses = $conn->query("
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard - Bus Reservation System</title>
     <link rel="stylesheet" href="dashboard.css">
 </head>
+
 <body>
     <div class="dashboard-container">
         <aside class="sidebar">
@@ -141,4 +143,9 @@ $availableBuses = $conn->query("
         </main>
     </div>
 </body>
+
 </html>
+
+<?php
+$conn->close();
+?>
