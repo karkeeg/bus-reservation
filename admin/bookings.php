@@ -20,16 +20,16 @@ if (isset($_POST['update_status'])) {
         if ($booking = $booking_query->fetch_assoc()) {
             $bus_no = $booking['bus_no'];
             $seats = $booking['num_people'];
-            $conn->query("UPDATE buses SET seats_available = seats_available + $seats WHERE bus_name = '$bus_no'");
+            $conn->query("UPDATE buses SET seats_available = seats_available + $seats WHERE bus_name = '$bus_name'");
         }
     }
     // If confirming a cancelled booking, update bus seats
     else if ($old_status === 'cancelled' && $status === 'confirmed') {
-        $booking_query = $conn->query("SELECT bus_no, num_people FROM bookings WHERE id = $booking_id");
+        $booking_query = $conn->query("SELECT bus_id, num_passengers FROM bookings WHERE id = $booking_id");
         if ($booking = $booking_query->fetch_assoc()) {
-            $bus_no = $booking['bus_no'];
-            $seats = $booking['num_people'];
-            $conn->query("UPDATE buses SET seats_available = seats_available - $seats WHERE bus_name = '$bus_no'");
+            $bus_no = $booking['bus_id'];
+            $seats = $booking['num_passengers'];
+            $conn->query("UPDATE buses SET seats_available = seats_available - $seats WHERE bus_name = '$bus_name'");
         }
     }
     
@@ -380,13 +380,13 @@ $bookings = $conn->query("
                         <tbody>
                             <?php while($booking = $bookings->fetch_assoc()): ?>
                             <tr>
-                                <td>#<?php echo $booking['id']; ?></td>
+                                <td><?php echo $booking['id']; ?></td>
                                 <td><?php echo htmlspecialchars($booking['full_name']); ?></td>
-                                <td><?php echo htmlspecialchars($booking['bus_no']); ?></td>
+                                <td><?php echo htmlspecialchars($booking['bus_name']); ?></td>
                                 <td><?php echo htmlspecialchars($booking['route']); ?></td>
                                 <td><?php echo htmlspecialchars($booking['travel_date']); ?></td>
-                                <td><?php echo htmlspecialchars($booking['num_people']); ?></td>
-                                <td>Rs. <?php echo number_format($booking['price'], 2); ?></td>
+                                <td><?php echo htmlspecialchars($booking['num_passengers']); ?></td>
+                                <td>Rs. <?php echo number_format($booking['ticket_price'], 2); ?></td>
                                 <td><?php echo htmlspecialchars($booking['phone']); ?></td>
                                 <td>
                                     <span class="status-badge status-<?php echo $booking['status'] ?? 'pending'; ?>">

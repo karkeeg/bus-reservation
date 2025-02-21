@@ -8,20 +8,81 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
-// Initialize variables
-$buses = [];
-$message = "";
+// Fetch all cities for dropdown
 $cities = [];
-
-// Get all cities for dropdowns
 $cityQuery = "SELECT name FROM cities ORDER BY name";
-$cityResult = $conn->query($cityQuery);
+$cityResult = $conn->query($cityQuery); 
 while ($row = $cityResult->fetch_assoc()) {
     $cities[] = $row['name'];
 }
 
-// Check if the form is submitted
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+// Initialize variables
+$buses = [];
+$message = "";
+
+// Process the booking form submission (POST method)
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['bus_id'])) {
+    // Fetch the form data
+    $bus_id = intval($_POST['bus_id']);
+    $user_id = $_SESSION['user_id']; // User ID from session
+    $num_passengers = intval($_POST['num_passengers']);
+    $phone = $_POST['phone'];
+
+
+    // Fetch ticket price from buses table
+    $priceQuery = "SELECT ticket_price FROM buses WHERE bus_id = ?";
+    if ($stmtPrice = $conn->prepare($priceQuery)) {
+        $stmtPrice->bind_param("i", $bus_id);
+        $stmtPrice->execute();
+        $stmtPrice->bind_result($ticket_price);
+        $stmtPrice->fetch();
+        $stmtPrice->close();
+    }
+    $total_price = $ticket_price * $num_passengers;
+    // Insert booking into the database
+    // Fetch bus details (from_city, to_city, departure_date)
+// Fetch bus details (bus_name, route, and travel_date)
+// Fetch bus details (bus_name, route, and travel_date) from joined tables
+$busQuery = "SELECT buses.bus_name, CONCAT(buses.from_city, ' - ', buses.to_city) AS route, buses.departure_date 
+             FROM buses 
+             WHERE buses.bus_id = ?";
+
+if ($stmtBus = $conn->prepare($busQuery)) {
+    $stmtBus->bind_param("i", $bus_id);
+    $stmtBus->execute();
+    $stmtBus->bind_result($bus_name, $route, $travel_date);
+    $stmtBus->fetch();
+    $stmtBus->close();
+}
+
+// Insert booking into the database with bus_name, route, and travel_date
+$bookingQuery = "INSERT INTO bookings (bus_id, user_id, num_passengers, phone, ticket_price, bus_name, route, travel_date) 
+                 VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+if ($stmt = $conn->prepare($bookingQuery)) {
+    $stmt->bind_param("iiisisss", $bus_id, $user_id, $num_passengers, $phone, $total_price, $bus_name, $route, $travel_date);
+    
+    if ($stmt->execute()) {
+        // Update available seats in buses table
+        $updateSeatsQuery = "UPDATE buses SET seats_available = seats_available - ? WHERE bus_id = ?";
+        if ($stmtUpdate = $conn->prepare($updateSeatsQuery)) {
+            $stmtUpdate->bind_param("ii", $num_passengers, $bus_id);
+            $stmtUpdate->execute();
+        }
+
+        // Redirect to avoid form resubmission
+        header("Location: book.php?booking_success=true");
+        exit();
+    } else {
+        $message = "Error while booking the bus. Please try again.";
+    }
+}
+
+}
+
+// Fetch all available buses (if no form submission or if the form is submitted with criteria)
+$searchQuery = "SELECT * FROM buses WHERE seats_available > 0 AND departure_date >= NOW() ORDER BY departure_date ASC";;
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['from'])) {
     $from_city = $conn->real_escape_string($_POST['from']);
     $to_city = $conn->real_escape_string($_POST['to']);
     $travel_date = $conn->real_escape_string($_POST['date']);
@@ -29,24 +90,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (strtotime($travel_date) < strtotime(date('Y-m-d'))) {
         $message = "Please select a future date.";
     } else {
-        // Fetch available buses with fare information
-        $sql = "SELECT b.*
-                FROM buses b 
-                WHERE b.departure_date = ? 
-                AND b.from_city = ? 
-                AND b.to_city = ? 
-                AND b.seats_available > 0";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param('sss', $travel_date, $from_city, $to_city);
-        $stmt->execute();
-        $result = $stmt->get_result();
-
-        if ($result->num_rows > 0) {
-            $buses = $result->fetch_all(MYSQLI_ASSOC);
-        } else {
-            $message = "No buses available for the selected route and date.";
+        if (!empty($from_city)) {
+            $searchQuery .= " AND from_city = '$from_city'";
+        }
+        if (!empty($to_city)) {
+            $searchQuery .= " AND to_city = '$to_city'";
+        }
+        if (!empty($travel_date)) {
+            $searchQuery .= " AND departure_date = '$travel_date'";
         }
     }
+}
+
+// Execute the query to fetch buses
+$result = $conn->query($searchQuery);
+if ($result->num_rows > 0) {
+    $buses = $result->fetch_all(MYSQLI_ASSOC);
+} else {
+    $message = "No buses available for the selected route and date.";
 }
 ?>
 
@@ -57,182 +118,219 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Bus Tickets</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+  }
 
-        body {
-            background-color: #f4f4f4;
-            color: #333;
-            line-height: 1.6;
-            padding: 20px;
-        }
+  body {
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+    padding: 20px;
+  }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
 
-        h1 {
-            text-align: center;
-            color: #2c3e50;
-            margin-bottom: 30px;
-        }
+  h1 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 30px;
+  }
 
-        .search-form {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            margin-bottom: 30px;
-        }
+  .search-form {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+  }
 
-        .form-row {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-bottom: 20px;
-        }
+  .form-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-bottom: 20px;
+  }
 
-        .form-group {
-            display: flex;
-            flex-direction: column;
-        }
+  .form-group {
+    display: flex;
+    flex-direction: column;
+  }
 
-        label {
-            margin-bottom: 8px;
-            font-weight: bold;
-        }
+  label {
+    margin-bottom: 8px;
+    font-weight: bold;
+  }
 
-        select, input, button {
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 16px;
-        }
+  select,
+  input,
+  button {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+  }
 
-        button {
-            background-color: #3498db;
-            color: white;
-            border: none;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
+  button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
 
-        button:hover {
-            background-color: #2980b9;
-        }
+  button:hover {
+    background-color: #2980b9;
+  }
 
-        .message {
-            padding: 10px;
-            border-radius: 4px;
-            margin-bottom: 20px;
-        }
+  .message {
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+  }
 
-        .message.error {
-            background-color: #fee;
-            color: #c0392b;
-            border: 1px solid #e74c3c;
-        }
+  .message.error {
+    background-color: #fee;
+    color: #c0392b;
+    border: 1px solid #e74c3c;
+  }
 
-        .message.info {
-            background-color: #eef;
-            color: #2980b9;
-            border: 1px solid #3498db;
-        }
+  .message.info {
+    background-color: #eef;
+    color: #2980b9;
+    border: 1px solid #3498db;
+  }
 
-        .bus-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
+  .bus-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+  }
 
-        .bus-card {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
+  .bus-card {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
 
-        .bus-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-        }
+  .bus-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
 
-        .bus-info {
-            margin-bottom: 15px;
-        }
+  .bus-info {
+    margin-bottom: 15px;
+  }
 
-        .bus-name {
-            font-size: 1.2em;
-            color: #2c3e50;
-            margin-bottom: 10px;
-        }
+  .bus-name {
+    font-size: 1.2em;
+    color: #2c3e50;
+    margin-bottom: 10px;
+  }
 
-        .price-tag {
-            background: #27ae60;
-            color: white;
-            padding: 5px 10px;
-            border-radius: 20px;
-            display: inline-block;
-            margin-bottom: 15px;
-        }
+  .price-tag {
+    background: #27ae60;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 20px;
+    display: inline-block;
+    margin-bottom: 15px;
+  }
+  .booking-form {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+    margin-top: 15px;
+    display: none;
+    transition: all 0.3s ease-in-out;
+  }
 
-        .booking-form {
-            background: #f9f9f9;
-            padding: 15px;
-            border-radius: 4px;
-            margin-top: 15px;
-            display: none;
-        }
+  .booking-form .form-group {
+    margin-bottom: 15px;
+  }
 
-        .booking-form input {
-            width: 100%;
-            margin-bottom: 10px;
-        }
+  .booking-form label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+    color: #2c3e50;
+  }
 
-        .btn-group {
-            display: flex;
-            gap: 10px;
-        }
+  .booking-form input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+  }
 
-        .btn-success {
-            background-color: #27ae60;
-        }
+  .booking-form input:focus {
+    border-color: #3498db;
+    outline: none;
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+  }
 
-        .btn-success:hover {
-            background-color: #219a52;
-        }
+  .btn-group {
+    display: flex;
+    gap: 10px;
+  }
 
-        .btn-secondary {
-            background-color: #95a5a6;
-        }
+  .btn-success {
+    background-color: #27ae60;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+  }
 
-        .btn-secondary:hover {
-            background-color: #7f8c8d;
-        }
+  .btn-success:hover {
+    background-color: #219a52;
+  }
 
-        .validation-error {
-            color: #e74c3c;
-            font-size: 0.9em;
-            margin-top: 5px;
-        }
+  .btn-secondary {
+    background-color: #95a5a6;
+    color: white;
+    margin-top:10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+  }
 
-        @media (max-width: 768px) {
-            .form-row {
-                grid-template-columns: 1fr;
-            }
-            
-            .container {
-                padding: 10px;
-            }
-        }
-    </style>
+  .btn-secondary:hover {
+    background-color: #7f8c8d;
+  }
+  .validation-error {
+    color: #e74c3c;
+    font-size: 0.9em;
+    margin-top: 5px;
+  }
+
+  @media (max-width: 768px) {
+    .form-row {
+      grid-template-columns: 1fr;
+    }
+
+    .container {
+      padding: 10px;
+    }
+  }
+</style>
+
 </head>
 <body>
     <div class="container">
@@ -282,52 +380,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
         <?php endif; ?>
 
+        <?php if (isset($_GET['booking_success']) && $_GET['booking_success'] === 'true'): ?>
+            <div class="message info">
+                Booking successful! Your bus ticket has been reserved.
+            </div>
+        <?php endif; ?>
+
         <?php if (!empty($buses)): ?>
             <div class="bus-grid">
                 <?php foreach ($buses as $bus): ?>
                     <div class="bus-card">
                         <div class="bus-info">
-                            <h3 class="bus-name"><?php echo htmlspecialchars($bus['bus_name']); ?></h3>
+                            <h3><?php echo htmlspecialchars($bus['bus_name']); ?></h3>
                             <div class="price-tag">Rs. <?php echo number_format($bus['ticket_price'], 2); ?></div>
                             <p><strong>From:</strong> <?php echo htmlspecialchars($bus['from_city']); ?></p>
                             <p><strong>To:</strong> <?php echo htmlspecialchars($bus['to_city']); ?></p>
                             <p><strong>Date:</strong> <?php echo date('l, F j, Y', strtotime($bus['departure_date'])); ?></p>
                             <p><strong>Available Seats:</strong> <?php echo htmlspecialchars($bus['seats_available']); ?></p>
                         </div>
-                        
-                        <button onclick="toggleBookingForm(<?php echo htmlspecialchars($bus['id']); ?>)">
-                            Book Now
-                        </button>
 
-                        <div id="form-<?php echo htmlspecialchars($bus['id']); ?>" class="booking-form">
-                            <form method="post" action="../confirm_booking.php" onsubmit="return validateBookingForm(this)">
-                                <input type="hidden" name="bus_id" value="<?php echo htmlspecialchars($bus['id']); ?>">
-                                <input type="hidden" name="date" value="<?php echo htmlspecialchars($bus['departure_date']); ?>">
-                                <input type="hidden" name="fare" value="<?php echo htmlspecialchars($bus['ticket_price']); ?>">
-                                
-                                <div class="form-group">
-                                    <label>Number of Passengers</label>
-                                    <input type="number" name="num_passengers" required min="1" 
-                                           max="<?php echo htmlspecialchars($bus['seats_available']); ?>">
-                                    <div class="validation-error"></div>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label>Phone Number</label>
-                                    <input type="tel" name="phone" required pattern="[0-9]{10}" 
-                                           title="Please enter a valid 10-digit phone number">
-                                    <div class="validation-error"></div>
-                                </div>
-                                
-                                <div class="btn-group">
-                                    <button type="submit" class="btn-success">Confirm Booking</button>
-                                    <button type="button" class="btn-secondary" 
-                                            onclick="toggleBookingForm(<?php echo htmlspecialchars($bus['id']); ?>)">
-                                        Cancel
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
+                        <button onclick="toggleBookingForm(<?php echo htmlspecialchars($bus['bus_id']); ?>)">Book Now</button>
+                        <form id="form-<?php echo $bus['bus_id']; ?>" class="booking-form" method="POST">
+                            <input type="hidden" name="bus_id" value="<?php echo $bus['bus_id']; ?>">
+                            <label>Number of Passengers</label>
+                            <input type="number" name="num_passengers" required min="1" max="<?php echo $bus['seats_available']; ?>">
+                            <label>Your Phone Number</label>
+                            <input type="text" name="phone" min="10"  required>
+                            <button type="submit" class="btn-success">Book Now</button>
+                            <button type="button" class="btn-secondary" onclick="toggleBookingForm(<?php echo $bus['bus_id']; ?>)">Cancel</button>
+                        </form>
                     </div>
                 <?php endforeach; ?>
             </div>
@@ -335,44 +416,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 
     <script>
-        function toggleBookingForm(busId) {
+          function toggleBookingForm(busId) {
             const form = document.getElementById('form-' + busId);
             if (form.style.display === 'none' || !form.style.display) {
-                // Hide all other forms
                 document.querySelectorAll('.booking-form').forEach(f => f.style.display = 'none');
-                // Show the selected form
                 form.style.display = 'block';
             } else {
                 form.style.display = 'none';
             }
         }
-
-        function validateBookingForm(form) {
-            let isValid = true;
-            const numPassengers = form.querySelector('input[name="num_passengers"]');
-            const phone = form.querySelector('input[name="phone"]');
-            
-            // Validate number of passengers
-            if (numPassengers.value < 1 || numPassengers.value > parseInt(numPassengers.max)) {
-                numPassengers.nextElementSibling.textContent = `Please enter a number between 1 and ${numPassengers.max}`;
-                isValid = false;
-            } else {
-                numPassengers.nextElementSibling.textContent = '';
-            }
-
-            // Validate phone number
-            if (!phone.value.match(/^[0-9]{10}$/)) {
-                phone.nextElementSibling.textContent = 'Please enter a valid 10-digit phone number';
-                isValid = false;
-            } else {
-                phone.nextElementSibling.textContent = '';
-            }
-
-            return isValid;
-        }
-
-        // Set minimum date for date input
-        document.querySelector('input[type="date"]').min = new Date().toISOString().split('T')[0];
     </script>
 </body>
 </html>

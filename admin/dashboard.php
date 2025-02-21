@@ -12,7 +12,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
 $totalUsers = $conn->query("SELECT COUNT(*) as count FROM users WHERE role = 'user'")->fetch_assoc()['count'];
 $totalBookings = $conn->query("SELECT COUNT(*) as count FROM bookings")->fetch_assoc()['count'];
 $totalBuses = $conn->query("SELECT COUNT(*) as count FROM buses")->fetch_assoc()['count'];
-$totalRevenue = $conn->query("SELECT SUM(price) as total FROM bookings")->fetch_assoc()['total'];
+$totalRevenue = $conn->query("SELECT SUM(ticket_price) as total FROM bookings")->fetch_assoc()['total'];
 
 // Fetch recent bookings
 $recentBookings = $conn->query("
@@ -106,7 +106,7 @@ $availableBuses = $conn->query("
                                     <td><?php echo htmlspecialchars($booking['full_name']); ?></td>
                                     <td><?php echo htmlspecialchars($booking['route']); ?></td>
                                     <td><?php echo htmlspecialchars($booking['travel_date']); ?></td>
-                                    <td>Rs. <?php echo number_format($booking['price'], 2); ?></td>
+                                    <td>Rs. <?php echo number_format($booking['ticket_price'], 2); ?></td>
                                 </tr>
                                 <?php endwhile; ?>
                             </tbody>
@@ -130,7 +130,7 @@ $availableBuses = $conn->query("
                                 <?php while($bus = $availableBuses->fetch_assoc()): ?>
                                 <tr>
                                     <td><?php echo htmlspecialchars($bus['bus_name']); ?></td>
-                                    <td><?php echo htmlspecialchars($bus['from_city']) . ' to ' . htmlspecialchars($bus['to_city']); ?></td>
+                                    <td><?php echo htmlspecialchars($bus['from_city']) . ' - '  . htmlspecialchars($bus['to_city']); ?></td>
                                     <td><?php echo htmlspecialchars($bus['departure_date']); ?></td>
                                     <td><?php echo htmlspecialchars($bus['seats_available']); ?></td>
                                 </tr>

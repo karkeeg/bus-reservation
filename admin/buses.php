@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Handle Delete Bus
     if (isset($_POST['delete_bus'])) {
         $bus_id = (int)$_POST['bus_id'];
-        $sql = "DELETE FROM buses WHERE id = $bus_id";
+        $sql = "DELETE FROM buses WHERE bus_id = $bus_id";
         if($conn->query($sql)) {
             header('Location: buses.php');
             exit();
@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if (isset($_POST['bus_id']) && !empty($_POST['bus_id'])) {
                     // Edit existing bus
                     $bus_id = (int)$_POST['bus_id'];
-                    $stmt = $conn->prepare("UPDATE buses SET bus_name=?, from_city=?, to_city=?, departure_date=?, seats_available=?, ticket_price=? WHERE id=?");
+                    $stmt = $conn->prepare("UPDATE buses SET bus_name=?, from_city=?, to_city=?, departure_date=?, seats_available=?, ticket_price=? WHERE bus_id=?");
                     $stmt->bind_param("ssssidi", $bus_name, $from_city, $to_city, $departure_date, $seats, $ticket_price, $bus_id);
                 } else {
                     // Add new bus
@@ -223,15 +223,23 @@ $buses = $conn->query("SELECT * FROM buses ORDER BY departure_date ASC");
             background-color: rgba(0, 0, 0, 0.5);
             z-index: 1000;
         }
-
         .modal-content {
             background-color: white;
-            margin: 10% auto;
+            margin: 2% auto;
             padding: 2rem;
-            border-radius: 0.5rem;
-            width: 90%;
-            max-width: 500px;
+            border-radius: 0.75rem;
+            width: 70%;
+            max-width: 600px;
             position: relative;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .modal-title {
+            color: #1f2937;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #e5e7eb;
         }
 
         .close {
@@ -242,14 +250,29 @@ $buses = $conn->query("SELECT * FROM buses ORDER BY departure_date ASC");
             cursor: pointer;
             color: #666;
         }
+        .modal-footer {
+            border-top: 1px solid #e5e7eb;
+            display: flex;
+            justify-content: flex-end;
+            gap: 0.5rem;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
 
         .form-group {
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
         }
 
         .form-group label {
             display: block;
             margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #374151;
         }
 
         .form-group input,
@@ -275,7 +298,6 @@ $buses = $conn->query("SELECT * FROM buses ORDER BY departure_date ASC");
             border-radius: 0.3rem;
             cursor: pointer;
             width: 100%;
-            margin-top: 1rem;
             font-size: 1rem;
         }
 
@@ -354,7 +376,7 @@ $buses = $conn->query("SELECT * FROM buses ORDER BY departure_date ASC");
                                 <td class="actions">
                                     <button onclick="showEditBusModal(<?php echo htmlspecialchars(json_encode($bus)); ?>)">Edit</button>
                                     <form method="POST" style="display: inline;" onsubmit="return confirm('Are you sure you want to delete this bus?');">
-                                        <input type="hidden" name="bus_id" value="<?php echo $bus['id']; ?>">
+                                        <input type="hidden" name="bus_id" value="<?php echo $bus['bus_id']; ?>">
                                         <button type="submit" name="delete_bus" class="delete-btn">Delete</button>
                                     </form>
                                 </td>

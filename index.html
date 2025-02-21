@@ -4,16 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ride-Mate Bus Reservation</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet" />
+
     <link rel="stylesheet" href="/bus-reservation/info.css" />
   </head>
   <body>
     <!-- Back to Top Button -->
-<button id="back-to-top" class="back-to-top" >
-    ↑
+    <button id="back-to-top" class="back-to-top">↑</button>
 
-  </button>
-  
     <header id="header">
       <img src="img/logo.png" alt="Ride-Mate Logo" id="logo" />
       <div class="auth-buttons">
@@ -38,10 +35,11 @@
     <section id="about" class="about-section">
       <h2>About Us</h2>
       <p>
-        <b style="font-size: 1.5em; font-weight: bolder;">Ride-Mate</b> is your trusted partner for seamless ticket booking
-        services across Nepal. Whether you’re planning a business trip, a family
-        getaway, or an adventure in the Himalayas, we help you find and book
-        tickets for buses, flights, and more with just a few clicks.
+        <b style="font-size: 1.5em; font-weight: bolder">Ride-Mate</b> is your
+        trusted partner for seamless ticket booking services across Nepal.
+        Whether you’re planning a business trip, a family getaway, or an
+        adventure in the Himalayas, we help you find and book tickets for buses,
+        flights, and more with just a few clicks.
       </p>
       <p>
         Explore destinations like Kathmandu, Pokhara, Chitwan, and Lumbini with
@@ -49,8 +47,6 @@
         affordability, and reliability for all travelers.
       </p>
     </section>
-
-
 
     <!-- Footer Section -->
     <footer id="footer">
@@ -106,26 +102,28 @@
     </footer>
 
     <script>
-        // Get the button
-const backToTopButton = document.getElementById('back-to-top');
+      // Get the button
+      const backToTopButton = document.getElementById("back-to-top");
 
-// When the user scrolls down 100px from the top, show the button
-window.onscroll = function() {
-  if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
-    backToTopButton.style.display = 'block';
-  } else {
-    backToTopButton.style.display = 'none';
-  }
-};
+      // When the user scrolls down 100px from the top, show the button
+      window.onscroll = function () {
+        if (
+          document.body.scrollTop > 100 ||
+          document.documentElement.scrollTop > 100
+        ) {
+          backToTopButton.style.display = "block";
+        } else {
+          backToTopButton.style.display = "none";
+        }
+      };
 
-// When the button is clicked, scroll to the top of the page
-backToTopButton.addEventListener('click', function() {
-  window.scrollTo({
-    top: 0,
-    behavior: 'smooth' // Smooth scroll to the top
-  });
-});
-
+      // When the button is clicked, scroll to the top of the page
+      backToTopButton.addEventListener("click", function () {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth", // Smooth scroll to the top
+        });
+      });
     </script>
   </body>
 </html>

@@ -24,15 +24,19 @@ if ($result_user->num_rows > 0) {
 }
 
 // Fetch user's bookings
-$sql_bookings = "SELECT b.*, bs.from_city, bs.to_city 
-                 FROM bookings b 
-                 LEFT JOIN buses bs ON b.bus_no = bs.bus_name 
-                 WHERE b.user_id = ? 
-                 ORDER BY b.travel_date DESC";
-$stmt = $conn->prepare($sql_bookings);
-$stmt->bind_param("i", $user_id);
-$stmt->execute();
-$result_bookings = $stmt->get_result();
+$sql_bookings = "SELECT b.*, bs.*, u.*
+    FROM bookings bs
+    JOIN buses b ON bs.bus_id = b.bus_id
+    JOIN users u ON bs.user_id = u.id
+    WHERE bs.user_id = ?"; // Make sure this query is complete
+
+if ($stmt = $conn->prepare($sql_bookings)) {
+    $stmt->bind_param('i', $_SESSION['user_id']);
+    $stmt->execute();
+    $result_bookings = $stmt->get_result(); // This was missing
+} else {
+    echo "Error in preparing query: " . $conn->error;
+}
 ?>
 
 <!DOCTYPE html>
@@ -281,22 +285,26 @@ $result_bookings = $stmt->get_result();
                             <thead>
                                 <tr>
                                     <th>Bus No</th>
+                                    <th>Bus Name</th>
                                     <th>Route</th>
                                     <th>Travel Date</th>
                                     <th>Seats</th>
                                     <th>Price</th>
-                                    <th>Action</th>
+                                    <th>Status</th>
+
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php while ($booking = $result_bookings->fetch_assoc()): ?>
                                     <tr>
-                                        <td><?php echo htmlspecialchars($booking['bus_no']); ?></td>
+                                        <td><?php echo htmlspecialchars($booking['bus_id']); ?></td>
+                                        <td><?php echo htmlspecialchars($booking['bus_name']); ?></td>
                                         <td><?php echo htmlspecialchars($booking['from_city']) . ' to ' . htmlspecialchars($booking['to_city']); ?></td>
-                                        <td><?php echo date('M d, Y', strtotime($booking['travel_date'])); ?></td>
-                                        <td><?php echo htmlspecialchars($booking['num_people']); ?></td>
-                                        <td>Rs. <?php echo number_format($booking['price'], 2); ?></td>
-                                        <td>
+                                        <td><?php echo date('M d, Y', strtotime($booking['departure_date'])); ?></td>
+                                        <td><?php echo htmlspecialchars($booking['num_passengers']); ?></td>
+                                        <td>Rs. <?php echo number_format($booking['ticket_price'], 2); ?></td>
+                                        <td><?php echo htmlspecialchars($booking['status']); ?></td>
+                                        <!-- <td>
                                             <?php if (strtotime($booking['travel_date']) > time()): ?>
                                                 <form action="cancel_booking.php" method="POST" style="display: inline;" onsubmit="return confirm('Are you sure you want to cancel this booking?');">
                                                     <input type="hidden" name="booking_id" value="<?php echo $booking['id']; ?>">
@@ -305,7 +313,7 @@ $result_bookings = $stmt->get_result();
                                             <?php else: ?>
                                                 <span style="color: #6c757d;">Completed</span>
                                             <?php endif; ?>
-                                        </td>
+                                        </td> -->
                                     </tr>
                                 <?php endwhile; ?>
                             </tbody>
@@ -328,4 +336,4 @@ $result_bookings = $stmt->get_result();
 <?php
 $stmt->close();
 $conn->close();
-?>
+?> 

@@ -252,23 +252,21 @@ $users = $conn->query("
         }
 
         .modal-footer {
-            margin-top: 2rem;
-            padding-top: 1.5rem;
             border-top: 1px solid #e5e7eb;
             display: flex;
             justify-content: flex-end;
-            gap: 1rem;
+            gap: 0.5rem;
         }
 
         .form-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 1.5rem;
-            margin-bottom: 1.5rem;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
         }
 
         .form-group {
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
         }
 
         .form-group.full-width {
